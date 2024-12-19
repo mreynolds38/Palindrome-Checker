@@ -1,0 +1,148 @@
+<!-- 
+    Name: Michael Reynolds
+    Class: Web Development
+    Date: 12/19/2024
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Palindrome Checker</title>
+    <!-- Added a cool font from Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
+    <style>
+        /* Made the background a nice color */
+        body {
+            background-color: #87CEEB;
+            font-family: 'Comic Neue', cursive;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* Made a box for my content */
+        .main-box {
+            background-color: white;
+            width: 80%;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        /* Made my title look cool */
+        h1 {
+            color: #2c3e50;
+            font-size: 36px;
+        }
+
+        /* Style for my input box */
+        #wordInput {
+            padding: 10px;
+            width: 200px;
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        /* Made my buttons look nice */
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Added a hover effect I learned */
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Style for showing results */
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        /* Added an image */
+        .cool-image {
+            width: 150px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-box">
+        <!-- Added a title -->
+        <h1>✨ Palindrome Checker ✨</h1>
+        
+        <!-- Added a fun image I found -->
+        <img src="https://cdn-icons-png.flaticon.com/512/6819/6819745.png" class="cool-image">
+        
+        <p>Type a word to see if it's a palindrome!</p>
+        <p><small>(Only real English words are checked)</small></p>
+        
+        <!-- This is where you type the word -->
+        <input type="text" id="wordInput" placeholder="Type here...">
+        <br>
+        
+        <!-- Buttons to check and try again -->
+        <button onclick="checkWord()">Check!</button>
+        <button onclick="tryAgain()">Try Again</button>
+        
+        <!-- This shows if it's a palindrome or not -->
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // This function checks if the word is a palindrome
+        function checkWord() {
+            // Get what the user typed
+            let word = document.getElementById('wordInput').value;
+            
+            // Make it lowercase and remove spaces
+            word = word.toLowerCase();
+            word = word.replace(/[^a-z0-9]/g, '');
+            
+            // Check if they typed anything
+            if(word === '') {
+                document.getElementById('result').innerHTML = 'Please type something!';
+                return;
+            }
+            
+            // Flip the word around
+            let backwards = '';
+            for(let i = word.length - 1; i >= 0; i--) {
+                backwards += word[i];
+            }
+            
+            // See if it matches
+            if(word === backwards) {
+                document.getElementById('result').innerHTML = 
+                    '🎉 Yes! "' + document.getElementById('wordInput').value + '" is a palindrome! 🎉';
+                document.getElementById('result').style.color = 'green';
+            } else {
+                document.getElementById('result').innerHTML = 
+                    '❌ Sorry, "' + document.getElementById('wordInput').value + '" is not a palindrome ❌';
+                document.getElementById('result').style.color = 'red';
+            }
+        }
+
+        // This clears everything to try again
+        function tryAgain() {
+            document.getElementById('wordInput').value = '';
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('wordInput').focus();
+        }
+
+        // Check when someone presses Enter
+        document.getElementById('wordInput').addEventListener('keyup', function(event) {
+            if(event.key === 'Enter') {
+                checkWord();
+            }
+        });
+    </script>
+</body>
+</html>
